@@ -1,0 +1,5 @@
+#!/bin/sh
+ROOT=`pwd`
+GIT_WORK_TREE=$ROOT/../green-www/ git checkout -f
+cd $ROOT/../green-www/
+npm install

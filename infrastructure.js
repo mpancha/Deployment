@@ -3,8 +3,8 @@ var httpProxy = require('http-proxy');
 var exec = require('child_process').exec;
 var request = require("request");
 
-var GREEN = 'http://152.46.17.169:5060';
-var BLUE  = 'http://152.46.17.169:9090';
+var GREEN = 'http://152.1.13.38:5060';
+var BLUE  = 'http://152.1.13.38:9090';
 
 var TARGET = BLUE;
 
@@ -21,30 +21,30 @@ var infrastructure =
       proxy.web( req, res, {target: TARGET } );
     });
     server.listen(8080);
-
+    console.log("Infrastructure Up");
     // Launch green slice
-    exec('forever -w start deploy/blue-www/main.js 9090', function(err, out, code) 
-    {
-      console.log("attempting to launch blue slice");
-      if (err instanceof Error)
-            throw err;
-      if( err )
-      {
-        console.error( err );
-      }
-    });
+   // exec('forever start /usr/bin/docker run -p 9090:8080 -d --name app_blue ncsu-app', function(err, out, code)
+   // {
+   //   console.log("attempting to launch blue slice");
+   //   if (err instanceof Error)
+   //         throw err;
+   //   if( err )
+   //   {
+   //     console.error( err );
+   //   }
+   // });
 
     // Launch blue slice
-    exec('forever -w start deploy/green-www/main.js 5060', function(err, out, code) 
-    {
-      console.log("attempting to launch green slice");
-      if (err instanceof Error)
-        throw err;
-      if( err )
-      {
-        console.error( err );
-      }
-    });
+    //exec('forever start /usr/bin/docker run -p 5060:8080 -d --name app_green ncsu-app', function(err, out, code) 
+    //{
+    //  console.log("attempting to launch green slice");
+    //  if (err instanceof Error)
+    //    throw err;
+    //  if( err )
+    //  {
+     //   console.error( err );
+    //  }
+    //});
 
     //setTimeout
     var heartBeat = setInterval(function(){

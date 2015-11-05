@@ -1,0 +1,5 @@
+#!/bin/sh
+ROOT=`pwd`
+GIT_WORK_TREE=$ROOT/../blue-www/ git checkout -f
+cd $ROOT/../blue-www/
+npm install
